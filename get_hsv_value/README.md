@@ -9,4 +9,8 @@
 - [X] load the saved value
 - [ ] get HSV lower and upper value based on the min and max value from other pixel in the radius x from the clicked one
 - [ ] seperate HSV slider from HSV window and make GUI for saving, loading object, and exit from loop
-- [ ] etc..
+- [ ] add camera capture, so doesn't need to prepare the image first XD
+<hr>
+
+## How to Use
+- mager heeheh
