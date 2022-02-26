@@ -1,0 +1,20 @@
+cmake_minimum_required(VERSION 3.20)
+
+project(main)
+# specify the C++ standard
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+SET("OpenCV_DIR" "C:/opencv/build/")
+SET("OpenCV_LIBS" "C:/opencv/build/x64/vc15/lib")
+SET("OpenCV_INCLUDE_DIRS" "C:/opencv/build/include")
+set(OpenCV_STATIC ON)
+find_package(OpenCV REQUIRED)
+IF  ( OpenCV_FOUND)
+MESSAGE(STATUS "COMPILING OPENCV TESTS")
+ELSE()
+MESSAGE(FATAL_ERROR "OpenCV  are required to build this project")
+endif() 
+add_executable(main tracking.cpp)
+
+include_directories(${OpenCV_INCLUDE_DIRS})
+TARGET_LINK_LIBRARIES(main ${OpenCV_LIBS})
