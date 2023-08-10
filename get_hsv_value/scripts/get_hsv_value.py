@@ -53,10 +53,13 @@ class GetColor:
         if args.image_path is not None:
             os.chdir(sys.path[0])
             print("cwd : ", os.getcwd())
+            print("image path : ", args.image_path)
             self.img = cv.imread(args.image_path)
+            cv.imshow("img", self.img)
+            cv.waitKey(500)
 
         elif args.video:
-            self.vid = True
+            self.use_vid = True
             self.cap = cv.VideoCapture(args.video)
             fps = self.cap.get(cv.CAP_PROP_FPS)
             self._delay = int(1000 / fps)
@@ -76,7 +79,6 @@ class GetColor:
             _, self.img = self.cap.read()
         # ret, self.img = self.cap.read()
         self.sample_range = args.radius
-        self.hsv = cv.cvtColor(self.img, cv.COLOR_BGR2HSV)
         # x,y = 3,2
         # [[[B, G, R], [B, G, R], []]
         #  [[B, G, R], [],        []]]
@@ -221,14 +223,12 @@ class GetColor:
         while True:
             if self.use_cam:
                 _, self.img = self.cap.read()
-                self.hsv = cv.cvtColor(self.img, cv.COLOR_BGR2HSV)
-            elif self.vid:
+            elif self.use_vid:
                 ret, self.img = self.cap.read()
                 if not ret:
                     self.cap.set(cv.CAP_PROP_POS_FRAMES, 0)
                     continue
-                self.hsv = cv.cvtColor(self.img, cv.COLOR_BGR2HSV)
-
+            self.hsv = cv.cvtColor(self.img, cv.COLOR_BGR2HSV)
                 # update slider
             b_low = cv.getTrackbarPos("b", "hsv")
             g_low = cv.getTrackbarPos("g", "hsv")
